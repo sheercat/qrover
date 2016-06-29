@@ -1,0 +1,15 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <h2>Create new domain for QR:{{servlet-context}}</h2>
+  <form action="{{servlet-context}}/service/generate/domain" method="POST">
+    {% csrf-token %}
+    <div class="form-group col-lg-3">
+      <label for="id">domain</label>
+      <p>
+        <input class="form-control" id="name" name="name" tabindex="1" type="text" ></input>
+      </p>
+
+      <input class="btn" tabindex="4" type="submit" value="generate">
+    </div>
+  </form>
+{% endblock %}

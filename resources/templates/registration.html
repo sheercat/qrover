@@ -1,0 +1,42 @@
+{% extends "templates/base.html" %}
+{% block menu %}
+{% endblock %}
+{% block content %}
+<form action="{{servlet-context}}/register" method="POST">
+  {% csrf-token %}
+  <div class="form-group col-lg-3">
+
+    <label for="email">email</label>
+    {% if validate-errors.email %}
+      <div class="alert alert-danger">{{validate-errors.email}}</div>
+    {% endif %}
+    <p>
+      <input class="form-control" id="email" name="email" tabindex="1" type="mail"></input>
+    </p>
+
+    <label for="pass">password</label>
+    {% if validate-errors.pass %}
+      <div class="alert alert-danger">{{validate-errors.pass}}</div>
+    {% endif %}
+    <p>
+      <input class="form-control" id="pass" name="pass" tabindex="2" type="password"></input>
+    </p>
+
+    <label for="pass1">retype password</label>
+    {% if validate-errors.pass1 %}
+      <div class="alert alert-danger">{{validate-errors.pass1}}</div>
+    {% endif %}
+    <p>
+      <input class="form-control" id="pass1" name="pass1" tabindex="3" type="password"></input>
+    </p>
+
+    <label for="admin">admin</label>
+    <p>
+      <input class="form-control" id="admin" name="admin" tabindex="4" type="checkbox"></input>
+    </p>
+
+    <input class="btn" tabindex="4" type="submit" value="create account">
+  </div>
+</form>
+{% endblock %}
+

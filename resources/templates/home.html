@@ -1,0 +1,18 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <div class="jumbotron" style="background: url('/images/qrover.jpg');">
+    <h1><font color="white">Welcome to QRover</font></h1>
+    <p><font color="white">Time to start building your qr!</font></p>
+  </div>
+  {% if user %}
+  <p><a class="btn btn-primary" href="{{servlet-context}}/service/qrcodes">QR 一覧</a></p>
+  <p><a class="btn btn-primary" href="{{servlet-context}}/service/types">type 一覧</a></p>
+  <p><a class="btn btn-primary" href="{{servlet-context}}/service/domains">domain 一覧</a></p>
+  {% endif %}
+ 
+  <div class="row-fluid">
+    <div class="span8">
+    {{content|safe}}
+    </div>
+  </div>
+{% endblock %}

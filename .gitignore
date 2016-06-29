@@ -1,4 +1,16 @@
+/target
+/lib
+/classes
+/checkouts
 pom.xml
+*.jar
+*.class
+/.lein-*
+/.env
+*.log
+.DS_Store
+.nrepl-port
+
 pom.xml.asc
 *jar
 /lib/
@@ -9,4 +21,3 @@ pom.xml.asc
 .lein-repl-history
 .lein-plugins/
 .lein-failures
-.nrepl-port

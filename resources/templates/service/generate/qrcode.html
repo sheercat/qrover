@@ -1,0 +1,45 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>Create new QR :{{servlet-context}}</h2>
+<form action="{{servlet-context}}/service/generate/qrcode" method="POST">
+  {% csrf-token %}
+  <div class="form-group col-lg-3">
+    <p style="white-space: nowrap;">
+      <select name="type" id="type">
+        {% for type in types %}
+        <option value="{{ type.id }}" /><label>{{ type.name }}</label>
+        {% endfor %}
+      </select>&nbsp;|&nbsp;<a class="btn btn-primary" href="/service/generate/type">create</a>
+    </p>
+    <p style="white-space: nowrap;">
+      <select name="domain" id="domain">
+        {% for domain in domains %}
+        <option value="{{ domain.id }}" /><label>{{ domain.domain }}</label>
+        {% endfor %}
+      </select>&nbsp;|&nbsp;<a class="btn btn-primary" href="/service/generate/domain">create</a>
+    </p>
+    <label for="reply">返信サブジェクト</label>
+    <p>
+      <input type="text" value="登録しました" name="subject"/>
+    </p>
+    <label for="reply">返信本文</label>
+    <p>
+      <textarea class="form-control" id="reply" name="reply" tabindex="1" rows="7" style="width:500px;">
+登録ありがとうございました。
+
+--
+* このメールに登録した覚えのない方、登録解除をしたい方は
+下記メールアドレスに空メールをお送りください。
+[]
+</textarea>
+    </p>
+
+    <label for="desc">QR の説明</label>
+    <p>
+      <textarea class="form-control" id="desc" name="desc" tabindex="1" rows=5 style="width:500px;"></textarea>
+    </p>
+
+    <input class="btn" tabindex="4" type="submit" value="generate">
+  </div>
+</form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% if notice-message %}
+<script>
+ $(document).ready(function () {
+   noty({text: '{{ notice-message }}',
+         type: 'information',
+         layout: 'center',
+         timeout: 3000,
+         template: '<div class="noty_message"><span style="font-size: 25px;" class="noty_text"></span><div class="noty_close"></div></div>',
+         });
+ });
+</script>
+{% endif %}
+{% if validate-errors.exists-error %}
+<script>
+ $(document).ready(function () {
+   noty({text: '{{ validate-errors }}',
+         type: 'error',
+         layout: 'top',
+         // timeout: 3000,
+         template: '<div class="noty_message"><span style="font-size: 25px;" class="noty_text"></span><div class="noty_close"></div></div>',
+         buttons: [ {addClass: 'btn btn-danger', text: 'Close', onClick: function($noty) {
+       $noty.close();
+       // noty({text: 'You clicked "Cancel" button', type: 'error'});
+     }}]});
+ });
+</script>
+{% endif %}
+<div class="navbar-collapse collapse">
+  {% if user-id %}
+  <div class="btn-group pull-right">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+          <i class="icon-user"></i>{{user.email}} <b class="caret"></b>
+        </a>
+        <ul class="dropdown-menu">
+          <li><a href="{{servlet-context}}/service/generate/qrcode">QR作成</a></li><li class="divider"></li>
+          <li><a href="{{servlet-context}}/service/generate/type">type作成</a></li><li class="divider"></li>
+          <li><a href="{{servlet-context}}/service/generate/domain">domain作成</a></li><li class="divider"></li>
+          {% if user.admin %}
+          <li><a href="{{servlet-context}}/register">Register</a></li><li class="divider"></li>
+          {% endif %}
+          <li><a href="{{servlet-context}}/logout">Sign Out</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+  {% else %}
+  <div class="btn-group pull-right">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <form action="{{servlet-context}}/login" class="navbar-form" method="POST">
+          {% csrf-token %}
+          <input class="span2"
+                 id="email"
+                 name="email"
+                 placeholder="email"
+                 style="margin-right: 5px"
+                 type="text"/>
+          <input class="span2"
+                 id="pass"
+                 name="pass"
+                 placeholder="password"
+                 style="margin-right: 5px"
+                 type="password"/>
+          <input class="btn" type="submit" value="Login"/>
+        </form>
+      </li>
+      {% if exists_admin %}
+      {% else %}
+      <li>
+        <a href="{{servlet-context}}/register">Register</a>
+      </li>
+      {% endif %}
+    </ul>
+  </div>
+  {% endif %}
+</div>

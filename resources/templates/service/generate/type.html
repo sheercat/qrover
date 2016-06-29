@@ -1,0 +1,20 @@
+{% extends "templates/base.html" %}
+{% block content %}
+  <h2>Create new type for QR:{{servlet-context}}</h2>
+  <form action="{{servlet-context}}/service/generate/type" method="POST">
+    {% csrf-token %}
+    <div class="form-group col-lg-3">
+      <label for="id">type<br />(メアドの先頭文字の指定（最大8文字の英数字）)</label>
+      <p>
+        <input class="form-control" id="type" name="type" tabindex="1" type="text" maxlength="8"></input>
+      </p>
+
+      <label for="id">名前</label>
+      <p>
+        <input class="form-control" id="name" name="name" tabindex="1" type="text" ></input>
+      </p>
+
+      <input class="btn" tabindex="4" type="submit" value="generate">
+    </div>
+  </form>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>emails&nbsp;(count:{{ count }})</h2>
+{% if count > 0 %}
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>email</th>
+    <th>type</th>
+    <th>created<br />updated</th>
+  </tr>
+  {% for item in rs %}
+  <tr>
+    <td><a href="/service/email/{{ item.id }}">{{ item.id }}</a></td>
+    <td><a href="/service/email/{{ item.id }}">{{ item.email }}</a></td>
+    <td>{{ item.type_name }}</td>
+    <td>{{ item.created_at }}<br />{{ item.updated_at }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a class="btn btn-primary" href="/service/get_emails/tsv/{{ belongs_to }}/{{ belongs_to_id }}">TSV</a><br />
+
+{% else %}
+<h3>email はありません('`)</h3>
+{% endif %}
+{% endblock %}

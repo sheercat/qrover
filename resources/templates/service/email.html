@@ -1,0 +1,28 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>email</h2>
+
+{% if rs %}
+{% for email in rs %}
+
+<table class="table">
+  <tr><th>id:</th><td>{{email.id}}</td></tr>
+  <tr><th>email:</th><td>{{email.email}}</td></tr>
+  <tr><th>qrcode:</th><td><pre>{{email.qrcodes_id}}</pre></td></tr>
+  <tr><th>type:</th><td><pre>{{email.types_id}}</pre></td></tr>
+  <tr><th>body:</th><td><pre>{{email.meta-body}}</pre></td></tr>
+  <tr><th>created at:</th><td>{{email.created_at}}</td></tr>
+  <tr><th>updated at:</th><td>{{email.updated_at}}</td></tr>
+</table>
+<hr />
+
+<a class="btn btn-danger confirm" href="/service/delete/email/{{email.id}}">DELETE</a><br />
+
+{% endfor %}
+{% endif %}
+
+<script type="text/javascript">
+ $(".confirm").click(function() { return confirm("削除します"); });
+</script>
+
+{% endblock %}

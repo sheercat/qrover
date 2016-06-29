@@ -1,0 +1,27 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>types</h2>
+{% if rs %}
+<table class="table">
+  <tr>
+    <th>id</th><th>type</th><th>name</th><th>created<br />updated</th><th></th><th></th>
+  </tr>
+  {% for item in rs %}
+  <tr>
+    <td>{{ item.id }}</td>
+    <td>{{ item.type }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.created_at }}<br />{{ item.updated_at }}</td>
+    <td><a class="btn btn-primary" href="/service/types/emails/{{ item.id }}">emails</a></td>
+    <td><a class="btn btn-danger confirm" href="/service/delete/type/{{item.id}}">DELETE</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<script type="text/javascript">
+ $(".confirm").click(function() { return confirm("削除します"); });
+</script>
+
+
+{% endblock %}

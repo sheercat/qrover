@@ -1,0 +1,27 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>QRcodes</h2>
+{% if rs %}
+<table class="table">
+  <tr>
+    <th>id</th>
+    <th>type</th>
+    <th>email</th>
+    <th>desc</th>
+    <th>created<br />updated</th>
+    <th></th>
+  </tr>
+  {% for item in rs %}
+  <tr>
+    <td>{{ item.id }}</td>
+    <td>{{item.type_name}}</td>
+    <td><a href="/service/qrcode/{{ item.id }}">{{ item.type_type}}-{{item.code}}@{{ item.domain_name }}</a></td>
+    <td>{{ item.meta-desc }}</td>
+    <td>{{ item.created_at }}<br />{{ item.updated_at }}</td>
+    <td><a class="btn btn-primary" href="/service/qrcode/{{ item.id }}">QR</a> |
+      <a class="btn btn-primary" href="/service/qrcodes/emails/{{item.id}}">emails</a></td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+{% endblock %}

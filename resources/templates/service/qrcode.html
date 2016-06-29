@@ -1,0 +1,30 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>QRcode</h2>
+{% for size in sizes %}
+<a href="/service/qrcode/{{qrcode.id}}?x={{size.x}}&y={{size.y}}">{{size.x}}x{{size.y}}</a>
+{% endfor %}
+<hr />
+<img alt="{{qrcode.id}}" src="data:image/png;base64,{{ image_data1 }}" />
+<br />
+<img alt="{{qrcode.id}}" src="data:image/png;base64,{{ image_data2 }}" />
+
+<table class="table">
+  <tr><th>id:</th><td>{{qrcode.id}}</td></tr>
+  <tr><th>email:</th><td>{{email}}</td></tr>
+  <tr><th>subject:</th><td><pre>{{qrcode.meta-subject}}</pre></td></tr>
+  <tr><th>reply:</th><td><pre>{{qrcode.meta-reply}}</pre></td></tr>
+  <tr><th>desc:</th><td><pre>{{qrcode.meta-desc}}</pre></td></tr>
+  <tr><th>created at:</th><td>{{qrcode.created_at}}</td></tr>
+  <tr><th>updated at:</th><td>{{qrcode.updated_at}}</td></tr>
+  <tr><th>emails({{ email-count }})</th><td><a class="btn btn-primary" href="/service/qrcodes/emails/{{qrcode.id}}">emails</a></td></tr>
+</table>
+<hr />
+
+<a class="btn btn-danger confirm" href="/service/delete/qrcode/{{qrcode.id}}">DELETE</a><br />
+
+<script type="text/javascript">
+ $(".confirm").click(function() { return confirm("削除します"); });
+</script>
+
+{% endblock %}

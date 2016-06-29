@@ -1,0 +1,33 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>insert email address</h2>
+<form name="insert" action="{{servlet-context}}/api/insert_email_bulky" method="POST">
+  {% csrf-token %}
+  <div class="form-group col-lg-3">
+    <p>
+      <select name="cmd" id="type">
+        {% for type in types %}
+        <option value="{{ type.id }}" /><label>{{ type.name }}</label>
+        {% endfor %}
+      </select>
+    </p>
+    <p>
+      <select name="ext" id="code">
+        {% for qrcode in qrcodes %}
+        <option value="{{ qrcode.code }}" /><label>{{ qrcode.code }}</label>
+        {% endfor %}
+      </select>
+    </p>
+    <label>email</label>
+
+    <input tabindex="1" name="sender" type="text" />
+    <input type="hidden" name="mbox"/>
+    <input type="hidden" name="from"/>
+    <input type="hidden" name="to"/>
+    <input type="hidden" name="body"/>
+
+    <input class="btn" tabindex="2" type="submit" value="insert">
+  </div>
+</form>
+{{errors.unknown}}
+{% endblock %}

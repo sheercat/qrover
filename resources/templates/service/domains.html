@@ -1,0 +1,17 @@
+{% extends "templates/base.html" %}
+{% block content %}
+<h2>QRcodes</h2>
+{% if rs %}
+<table class="table">
+  <tr><th>id</th><th>domain</th><th>created</th><th>updated</th><th></th></tr>
+  {% for item in rs %}
+  <tr><td>{{ item.id }}</td><td>{{ item.domain }}</td><td>{{ item.created_at }}</td><td>{{ item.updated_at }}</td><td><a class="btn btn-danger confirm" href="/service/delete/domain/{{item.id}}">DELETE</a></td></tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<script type="text/javascript">
+ $(".confirm").click(function() { return confirm("削除します"); });
+</script>
+
+{% endblock %}
